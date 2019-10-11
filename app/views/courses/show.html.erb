@@ -13,20 +13,24 @@
       </div>
   </div>
 
+  
   <div class="row">
-    <div class="column teachers-col">
-      <h4>
-        <strong>Profesores </strong>
-      </h4>
-      <% @course.users.each do |user|%>
-        <% if user.is_teacher %>
-          <h6>
-            <strong>Nombre: </strong><%= link_to user.first_name + " " + user.last_name, user_path(user) %> - 
-            <strong>Correo: </strong><%= user.email %>
-          </h6>
-        <% end %>
-      <% end %> 
-    </div>
+    <% if !current_user.is_teacher %>
+      <div class="column teachers-col">
+        <h4>
+          <strong>Profesores </strong>
+        </h4>
+        <% @course.users.each do |user|%>
+          <% if user.is_teacher %>
+            <h6>
+              <strong>Nombre: </strong><%= link_to user.first_name + " " + user.last_name, user_path(user) %> - 
+              <strong>Correo: </strong><%= user.email %>
+            </h6>
+          <% end %>
+        <% end %> 
+      </div>
+    <% end %>
+    
     <div class="column">
       <h4>
         <strong>Alumnos </strong>

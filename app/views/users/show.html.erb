@@ -91,11 +91,13 @@
         </div>
         <hr>
         <div class="row">
-          <div class="column ratings-col">
-            <h4>
-              <strong>Promedio Evaluaciones: </strong> <%= @user.mean_of_ratings.round(2) %>
-            </h4>
-          </div>
+          <% if @user.is_teacher %>
+            <div class="column ratings-col">
+              <h4>
+                <strong>Promedio Evaluaciones: </strong> <%= @user.mean_of_ratings.round(2) %>
+              </h4>
+            </div>
+          <% end %>
           <div class="column">
             <h4>
               <strong>Cursos a los que pertenece </strong>
