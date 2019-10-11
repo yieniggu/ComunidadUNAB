@@ -10,12 +10,12 @@ class CommentsController < ApplicationController
   end
   """
 
-  """
+  
   # GET /comments/1
   # GET /comments/1.json
   def show
   end
-  """
+  
 
   # GET /comments/new
   def new
@@ -31,17 +31,21 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
 
-    respond_to do |format|
-      if @comment.save
-        format.html { redirect_to @comment, notice: 'Comment was successfully created.' }
-        format.json { render :show, status: :created, location: @comment }
-      else
-        format.html { render :new }
-        format.json { render json: @comment.errors, status: :unprocessable_entity }
+    # Chequeamos si el usuario actual pertenece al curso
+    if !current_user.courses.include?(@comment.course)
+      redirect_to "/"
+    else
+      respond_to do |format|
+        if @comment.save
+          redirect_to "courses/#{@comment.course_id}"
+        else
+          redirect_to "/"
+        end
       end
     end
   end
 
+  """
   # PATCH/PUT /comments/1
   # PATCH/PUT /comments/1.json
   def update
@@ -65,7 +69,7 @@ class CommentsController < ApplicationController
       format.json { head :no_content }
     end
   end
-
+  """
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_comment

@@ -11,6 +11,9 @@ class CoursesController < ApplicationController
   # GET /courses/1
   # GET /courses/1.json
   def show
+    if !@course.users.include? current_user
+      redirect_to user_path(current_user)
+    end
   end
 
   # GET /courses/new
@@ -22,6 +25,7 @@ class CoursesController < ApplicationController
   def edit
   end
 
+  """
   # POST /courses
   # POST /courses.json
   def create
@@ -37,7 +41,9 @@ class CoursesController < ApplicationController
       end
     end
   end
+  """
 
+  """
   # PATCH/PUT /courses/1
   # PATCH/PUT /courses/1.json
   def update
@@ -61,6 +67,7 @@ class CoursesController < ApplicationController
       format.json { head :no_content }
     end
   end
+  """
 
   private
     # Use callbacks to share common setup or constraints between actions.
