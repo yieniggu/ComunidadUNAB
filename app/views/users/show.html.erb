@@ -1,24 +1,27 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>First name:</strong>
-  <%= @user.first_name %>
-</p>
-
-<p>
-  <strong>Last name:</strong>
-  <%= @user.last_name %>
-</p>
-
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
-
-<p>
-  <strong>Is teacher:</strong>
-  <%= @user.is_teacher %>
-</p>
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<div class="container">
+    <div style="background:transparent !important" class="jumbotron jumbotron-text">
+      <h1 class="display-4"><span class="top-left">Bienvenido a </span>ComunidadUNAB,
+          <%= @user.first_name %>
+      </h1>
+      <div class="row justify-content-end tf">
+          <h3>Sistema comunitario<span class="skere"> de la Universidad Andres Bello</span></h3>
+      </div>
+      <hr>
+      <br>
+      <div class="column">
+        <div class="row">
+          <h5>
+            Nombre alumno: <%= @user.first_name %> <%= @user.last_name %>
+          </h5>
+        </div>
+        <br>
+        <div class="row">
+          <h5>
+            Correo: <%= @user.email %>
+          </h5>
+        </div>
+      </div>
+  </div>
+</div>
