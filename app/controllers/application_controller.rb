@@ -17,7 +17,11 @@ class ApplicationController < ActionController::Base
 
     # Verifica si el usuario de la sesion actual es el mismo que el de la vista a mostrar
     def is_current_user?(user)
-        current_user.id == user.id ? true : false
+        if !logged_in?
+            return false
+        else 
+            current_user.id == user.id ? true : false
+        end
     end
 
     def require_user
