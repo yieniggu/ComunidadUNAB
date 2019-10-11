@@ -37,7 +37,7 @@ class CommentsController < ApplicationController
     else
       respond_to do |format|
         if @comment.save
-          redirect_to "courses/#{@comment.course_id}"
+          redirect_to "/courses/#{@comment.course_id}"
         else
           redirect_to "/"
         end
