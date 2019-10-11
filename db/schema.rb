@@ -37,8 +37,10 @@ ActiveRecord::Schema.define(version: 2019_10_11_141459) do
     t.integer "value"
     t.text "comment"
     t.bigint "user_id", null: false
+    t.bigint "course_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["course_id"], name: "index_ratings_on_course_id"
     t.index ["user_id"], name: "index_ratings_on_user_id"
   end
 
@@ -61,5 +63,6 @@ ActiveRecord::Schema.define(version: 2019_10_11_141459) do
 
   add_foreign_key "comments", "courses"
   add_foreign_key "comments", "users"
+  add_foreign_key "ratings", "courses"
   add_foreign_key "ratings", "users"
 end

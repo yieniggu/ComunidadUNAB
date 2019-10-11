@@ -9,6 +9,9 @@ user = User.create(first_name: "Bastian", last_name: "Simpertigue", email: "b.si
 teacher = User.create(first_name: "Francisco", last_name: "Marshall", email: "f.marshall@uandresbello.edu", is_teacher: true, password: "passProfe")
 course = Course.create(name: "Arquitectura de Sistemas", description: "Teorico Practico", nrc: "2404")
 
-Rating.create(value: 5, comment: "Buen profesor", user: teacher)
-Rating.create(value: 7, comment: "Excelente profesor", user: teacher)
-Rating.create(value: 2, comment: "Mal profesor profesor", user: teacher)
+UserCourse.create(user_id: user.id, course_id: course.id)
+UserCourse.create(user_id: teacher.id, course_id: course.id)
+
+Rating.create(value: 5, comment: "Buen profesor", user: teacher, course: course)
+Rating.create(value: 7, comment: "Excelente profesor", user: teacher, course: course)
+Rating.create(value: 2, comment: "Mal profesor profesor", user: teacher, course: course)
