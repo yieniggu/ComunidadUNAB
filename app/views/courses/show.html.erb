@@ -1,19 +1,82 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @course.name %>
-</p>
+<div class="container">
+  <div style="background:transparent !important" class="jumbotron jumbotron-text">
+      <div class="row justify-content-start course-title left">
+        <h1>
+          <span class="top-left course">Bienvenido al curso</span> de
+        </h1>
+      </div>
+      
+      <div class="row justify-content-end tf course-title right">
+        <h3><%= @course.name %><span class="skere"> - NRC <%= @course.nrc %></span></h3>
+      </div>
+  </div>
 
-<p>
-  <strong>Description:</strong>
-  <%= @course.description %>
-</p>
+  <div class="row">
+    <div class="column teachers-col">
+      <h4>
+        <strong>Profesores </strong>
+      </h4>
+      <% @course.users.each do |user|%>
+        <% if user.is_teacher %>
+          <h6>
+            <strong>Nombre: </strong><%= link_to user.first_name + " " + user.last_name, user_path(user) %> - 
+            <strong>Correo: </strong><%= user.email %>
+          </h6>
+        <% end %>
+      <% end %> 
+    </div>
+    <div class="column">
+      <h4>
+        <strong>Alumnos </strong>
+      </h4>
+      <% @course.users.each do |user|%>
+        <% if !user.is_teacher %>
+          <h6>
+            <strong>Nombre: </strong><%= link_to user.first_name + " " + user.last_name, user_path(user) %> - 
+            <strong>Correo: </strong><%= user.email %>
+          </h6>
+        <% end %>
+      <% end %> 
+    </div>
+  </div>
+  <hr>
 
-<p>
-  <strong>Nrc:</strong>
-  <%= @course.nrc %>
-</p>
+  <h4 style="margin: none">
+    <strong>Comentarios</strong>
+  </h4>
+  <div class="row">
+    <div class="column">
+      <% @course.comments.each do |comment| %>
+        <div class="row">
+          <div class="column">
+            <h3>
+              <span class="user-name"><%= comment.user.first_name %> <%= comment.user.last_name %></span>
+              <span class="user-email"><%= comment.user.email %></span>
+            </h3>
+            <p class="comment"><%= comment.body %></p>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
 
-<%= link_to 'Edit', edit_course_path(@course) %> |
-<%= link_to 'Back', courses_path %>
+  <br>
+  <%= form_for(:comment, :html => {class: "form-horizontal", role: "form"}, url: comments_path) do |f| %>
+    <div class="row">
+        <%= f.text_field :body, class: "form-control", autocomplete: "off"%>
+    </div>
+    <br>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10 justify-content-center">
+          <div class="row justify-content-end">
+              <%= f.submit "Comentar", class: 'btn btn-primary btn-comment' %>
+          </div>
+      </div>
+      <%= f.hidden_field :course_id, value: @course.id %>
+      <%= f.hidden_field :user_id, value: current_user.id %>    
+    </div>
+  <% end %> 
+  
+</div>
