@@ -10,17 +10,18 @@
         <li class="nav-item nav-link">
           <%= link_to  "Mi Perfil", user_path(current_user) %>
         </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Tus Cursos
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Something else here</a>
-          </div>
-        </li>
+        <% if current_user.courses.any? %>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Tus Cursos
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <% current_user.courses.each do |course| %>
+                <%= link_to "#{course.name}", course_path(course), class: "course-link" %>
+                <hr>
+              <% end %>
+          </li>
+        <% end %>
       </ul>
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">

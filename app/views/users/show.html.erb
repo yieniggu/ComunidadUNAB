@@ -1,50 +1,82 @@
 <p id="notice"><%= notice %></p>
 
 <div class="container">
-    <div style="background:transparent !important" class="jumbotron jumbotron-text">
-      <h1><span class="top-left">Bienvenido a </span>ComunidadUNAB,
-          <%= @user.first_name %>
-      </h1>
+  <div style="background:transparent !important" class="jumbotron jumbotron-text">
+    <% if is_current_user?(@user) %>
+      <div class="row justify-content-start">
+        <h1>
+          <span class="top-left">Bienvenido a </span>ComunidadUNAB, <%= @user.first_name %>
+        </h1>
+      </div>
+      
       <div class="row justify-content-end tf">
           <h3>Sistema comunitario<span class="skere"> de la Universidad Andres Bello</span></h3>
       </div>
+
       <hr>
-      <br>
+
       <div class="column">
         <div class="row">
           <h5>
             <strong>Nombre: <%= @user.first_name %> <%= @user.last_name %></strong> 
           </h5>
         </div>
+
         <br>
+
         <div class="row">
           <h5>
             <strong>Correo: <%= @user.email %></strong> 
           </h5>
         </div>
+
         <hr>
-        <% if !@user.ratings.empty? %>
-          <% if is_current_user?(@user) %>
-            <h4>
-              <strong>Evaluaciones</strong> 
-            </h4>
-            <div>
-              <% @user.ratings.each do |rating| %>
-                <div class="container">
-                  <div class="column">
-                    <h5>Evaluacion: <%= rating.value %></h5>
-                    <p>Comentario: <%= rating.comment %></p>
-                  </div>
+
+        <% if @user.ratings.any? %>
+          <h4>
+            <strong>Evaluaciones</strong> 
+          </h4>
+          <div>
+            <% @user.ratings.each do |rating| %>
+              <div class="container">
+                <div class="column">
+                  <h5>Evaluacion: <%= rating.value %></h5>
+                  <p>Comentario: <%= rating.comment %></p>
                 </div>
-                <hr>
-              <% end %>
-            </div> 
-          <% else %>
-            <h4>
-            <strong>Promedio Evaluaciones: </strong> 
-            <%= @user.mean_of_ratings.round(2) %>
-            </h4>
-          <% end %> 
-        <% end %>  
+              </div>
+              <hr>
+            <% end %>
+          </div>
+        <% end %>
+    <% else %> 
+        <div clas="row justify-content-start">
+          <h1>
+            <span class="top-left">Perfil del <%= @user.is_teacher ? "profesor" : "alumno" %> </span><%= @user.first_name + " " + @user.last_name %>
+          </h1>
+        </div>
+
+        <div class="row justify-content-end tf">
+          <h3>Sistema comunitario<span class="skere"> de la Universidad Andres Bello</span></h3>
+        </div>   
+  
+        <hr>
+        <div class="column">
+          <div class="row">
+            <h5>
+              <strong>Nombre: <%= @user.first_name %> <%= @user.last_name %></strong> 
+            </h5>
+          </div>
+          <br>
+          <div class="row">
+            <h5>
+              <strong>Correo: <%= @user.email %></strong> 
+            </h5>
+          </div>
+        </div>
+        <hr>
+        <h4>
+          <strong>Promedio Evaluaciones: </strong> <%= @user.mean_of_ratings.round(2) %>
+        </h4>
+    <% end %>   
   </div>
 </div>
