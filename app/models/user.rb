@@ -6,12 +6,16 @@ class User < ApplicationRecord
     has_many :courses , through: :user_courses
 
 
-    def mean_of_ratings
+    def mean_of_ratings(course)
+        ratings = self.ratings.select {|rating| rating.course_id == course.id}
         acum = 0
-        self.ratings.each do |rating|
+        ratings.each do |rating|
+            print(rating)
+            print(rating.value)
             acum += rating.value
         end
 
+        print(acum)
         return acum/ratings.size.to_f
     end
 end
