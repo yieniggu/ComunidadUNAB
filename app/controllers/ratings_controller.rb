@@ -2,42 +2,47 @@ class RatingsController < ApplicationController
   before_action :set_rating, only: [:show, :edit, :update, :destroy]
   before_action :require_user
 
+  """
   # GET /ratings
   # GET /ratings.json
   def index
     @ratings = Rating.all
   end
+  
 
+  
   # GET /ratings/1
   # GET /ratings/1.json
   def show
   end
+  """
 
   # GET /ratings/new
   def new
     @rating = Rating.new
+    @course_id = params[:course_id]
+    @user_id = params[:user_id]
   end
 
+  """
   # GET /ratings/1/edit
   def edit
   end
-
+  """
+  
   # POST /ratings
   # POST /ratings.json
   def create
     @rating = Rating.new(rating_params)
 
-    respond_to do |format|
-      if @rating.save
-        format.html { redirect_to @rating, notice: 'Rating was successfully created.' }
-        format.json { render :show, status: :created, location: @rating }
-      else
-        format.html { render :new }
-        format.json { render json: @rating.errors, status: :unprocessable_entity }
-      end
+    if @rating.save
+      redirect_to "/users/#{@rating.user_id}"
+    else
+      redirect_to "/"
     end
   end
 
+  """
   # PATCH/PUT /ratings/1
   # PATCH/PUT /ratings/1.json
   def update
@@ -51,7 +56,8 @@ class RatingsController < ApplicationController
       end
     end
   end
-
+  """
+  """
   # DELETE /ratings/1
   # DELETE /ratings/1.json
   def destroy
@@ -60,7 +66,7 @@ class RatingsController < ApplicationController
       format.html { redirect_to ratings_url, notice: 'Rating was successfully destroyed.' }
       format.json { head :no_content }
     end
-  end
+  end"""
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -70,6 +76,6 @@ class RatingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def rating_params
-      params.require(:rating).permit(:value, :comment, :user_id)
+      params.require(:rating).permit(:value, :comment, :user_id, :course_id)
     end
 end

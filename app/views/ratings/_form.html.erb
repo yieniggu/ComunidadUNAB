@@ -1,32 +1,24 @@
-<%= form_with(model: rating, local: true) do |form| %>
-  <% if rating.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(rating.errors.count, "error") %> prohibited this rating from being saved:</h2>
-
-      <ul>
-        <% rating.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+<div class="container login-container" align="center">
+  <h1 style="margin-bottom: 2rem">Evaluacion</h1>
+  <%= form_for(:rating, :html => {class: "form-horizontal", role: "form"}, url: ratings_path) do |f| %>
+    <div class="form-group">
+      <div class="col-sm-8">
+        <%= f.number_field :value, class: "form-control", autofocus: true, min: 1, max: 7  %>
+      </div>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :value %>
-    <%= form.number_field :value %>
-  </div>
-
-  <div class="field">
-    <%= form.label :comment %>
-    <%= form.text_area :comment %>
-  </div>
-
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.text_field :user_id %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+    <div class="form-group">
+      <div class="col-sm-8">
+        <%= f.text_field :comment, class: "form-control ", autocomplete: "off" , placeholder: "Escribe un comentario"%>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10 justify-content-center">
+        <%= f.hidden_field :course_id, value: @course_id%>
+        <%= f.hidden_field :user_id, value: @user_id %> 
+        <div class="row justify-content-center">
+          <%= f.submit "Evaluar", class: 'btn btn-success btn' %>
+        </div>
+      </div>
+    </div>
+  <% end %> 
+</div>
