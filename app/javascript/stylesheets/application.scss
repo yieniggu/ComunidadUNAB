@@ -1,1 +1,13 @@
-@import "~bootstrap/scss/bootstrap"
+@import "~bootstrap/scss/bootstrap";
+
+.container.login-container{
+    margin-top: 2rem;
+}
+
+.form-control.login{
+    width: 80%;
+}
+
+.login-submit{
+    padding: 0.3rem 0.5rem;
+}
