@@ -35,12 +35,10 @@ class CommentsController < ApplicationController
     if !current_user.courses.include?(@comment.course)
       redirect_to "/"
     else
-      respond_to do |format|
-        if @comment.save
-          redirect_to "/courses/#{@comment.course_id}"
-        else
-          redirect_to "/"
-        end
+      if @comment.save
+        redirect_to "/courses/#{@comment.course_id}"
+      else
+        redirect_to "/"
       end
     end
   end
