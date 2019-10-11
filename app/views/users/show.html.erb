@@ -10,7 +10,7 @@
       </div>
       
       <div class="row justify-content-end tf">
-          <h3>Sistema comunitario<span class="skere"> de la Universidad Andres Bello</span></h3>
+        <h3>Sistema comunitario<span class="skere"> de la Universidad Andres Bello</span></h3>
       </div>
 
       <hr>
@@ -29,11 +29,11 @@
             <strong>Correo: <%= @user.email %></strong> 
           </h5>
         </div>
-
+      </div>
         <hr>
 
-        <% if @user.ratings.any? %>
-          <div class="row">
+        <div class="row">
+          <% if @user.ratings.any? %>
             <div class="column ratings-col">
               <h4>
                 <strong>Evaluaciones</strong> 
@@ -50,23 +50,10 @@
                 <% end %>
               </div>
             </div>
-            <div class="column courses-col">
-              <h4>
-                <strong>Cursos a los que pertenece</strong> 
-              </h4>
-              <% @user.courses.each do |course| %>
-                <div class="container">
-                  <div class="column">
-                    <h5><%= course.name %> - NRC <%= course.nrc %></h5>
-                  </div>
-                </div>
-              <% end %>
-            </div>
-          </div>
-        <% else %>
-          <div class="column courses-col">
+          <% end %>
+          <div class="column">
             <h4>
-              <strong>Cursos a los que pertenece</strong> 
+              <strong>Cursos a los que pertenece </strong>
             </h4>
             <% @user.courses.each do |course| %>
               <div class="container">
@@ -74,9 +61,9 @@
                   <h5><%= link_to course.name + " - NRC " + course.nrc.to_s, course_path(course) %></h5>
                 </div>
               </div>
-              <% end %>  
+            <% end %>
           </div>
-        <% end %>
+        </div>
     <% else %> 
         <div clas="row justify-content-start">
           <h1>
@@ -103,9 +90,27 @@
           </div>
         </div>
         <hr>
-        <h4>
-          <strong>Promedio Evaluaciones: </strong> <%= @user.mean_of_ratings.round(2) %>
-        </h4>
-    <% end %>   
+        <div class="row">
+          <div class="column ratings-col">
+            <h4>
+              <strong>Promedio Evaluaciones: </strong> <%= @user.mean_of_ratings.round(2) %>
+            </h4>
+          </div>
+          <div class="column">
+            <h4>
+              <strong>Cursos a los que pertenece </strong>
+            </h4>
+            <% @user.courses.each do |course| %>
+              <div class="container">
+                <div class="column">
+                  <h5><%= link_to course.name + " - NRC " + course.nrc.to_s, course_path(course) %></h5>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+    <% end %>
   </div>
 </div>
+
+  
