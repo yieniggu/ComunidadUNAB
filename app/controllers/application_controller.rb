@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
     protect_from_forgery with: :exception
     
     # Los helpers disponibilizan los metodos a todas las vistas
-    helper_method :curent_user, :logged_in?, :is_current_user?
+    helper_method :current_user, :logged_in?, :is_current_user?
 
     def current_user
         # Retorna el usuario si es que existe una sesion (@ evita que se pegue a la base de datos multiples veces)
