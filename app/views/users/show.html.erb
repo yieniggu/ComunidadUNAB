@@ -33,19 +33,48 @@
         <hr>
 
         <% if @user.ratings.any? %>
-          <h4>
-            <strong>Evaluaciones</strong> 
-          </h4>
-          <div>
-            <% @user.ratings.each do |rating| %>
+          <div class="row">
+            <div class="column ratings-col">
+              <h4>
+                <strong>Evaluaciones</strong> 
+              </h4>
+              <div>
+                <% @user.ratings.each do |rating| %>
+                  <div class="container">
+                    <div class="column">
+                      <h5>Evaluacion: <%= rating.value %></h5>
+                      <p>Comentario: <%= rating.comment %></p>
+                    </div>
+                  </div>
+                  <hr>
+                <% end %>
+              </div>
+            </div>
+            <div class="column courses-col">
+              <h4>
+                <strong>Cursos a los que pertenece</strong> 
+              </h4>
+              <% @user.courses.each do |course| %>
+                <div class="container">
+                  <div class="column">
+                    <h5><%= course.name %> - NRC <%= course.nrc %></h5>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        <% else %>
+          <div class="column courses-col">
+            <h4>
+              <strong>Cursos a los que pertenece</strong> 
+            </h4>
+            <% @user.courses.each do |course| %>
               <div class="container">
                 <div class="column">
-                  <h5>Evaluacion: <%= rating.value %></h5>
-                  <p>Comentario: <%= rating.comment %></p>
+                  <h5><%= link_to course.name + " - NRC " + course.nrc.to_s, course_path(course) %></h5>
                 </div>
               </div>
-              <hr>
-            <% end %>
+              <% end %>  
           </div>
         <% end %>
     <% else %> 
