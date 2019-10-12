@@ -15,7 +15,9 @@
 
     sudo docker-compose build
 
-    sudo docker-compose web rake db:create db:migrate db:seed
+    sudo docker-compose run web rake db:create db:migrate db:seed
+
+    sudo docker-compose run web rake assets:precompile
 
     docker-compose up
 ```
