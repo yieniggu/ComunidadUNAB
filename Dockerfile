@@ -1,7 +1,7 @@
 FROM ruby:2.6.4
 RUN apt-get update -qq && apt-get install -y nodejs postgresql-client npm
-RUN node -v
 RUN npm -v
+RUN node -v
 RUN npm install -g yarn
 RUN yarn install --check-files
 RUN mkdir /myapp
@@ -10,6 +10,7 @@ COPY Gemfile /myapp/Gemfile
 COPY Gemfile.lock /myapp/Gemfile.lock
 RUN bundle install
 COPY . /myapp
+RUN npm install
 
 # Add a script to be executed every time the container starts.
 COPY entrypoint.sh /usr/bin/
