@@ -1,24 +1,31 @@
-# README
+# Comunidad UNAB
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Participantes
++ Bastian Simpertigue
 
-Things you may want to cover:
+### Link heroku
+[comunidad-unab]()
 
-* Ruby version
+### Instrucciones
 
-* System dependencies
+```
+    git clone https://github.com/yieniggu/ComunidadUNAB
 
-* Configuration
+    cd ComunidadUNAB
 
-* Database creation
+    sudo docker-compose build
 
-* Database initialization
+    sudo docker-compose web rake db:create db:migrate db:seed
 
-* How to run the test suite
+    docker-compose up
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+### Usuarios
 
-* Deployment instructions
+##### Profesores
++ User: f.marshall@uandresbello.edu - pass: passProfe 
++ User: s.troncoso@uandresbello.edu - pass: passAyudante
 
-* ...
+##### Alumnos
++ User: b.simpercifu@uandresbello.edu - pass: passBastian
++ User: j.retamales@uandresbello.edu - pass: passJoaquin
